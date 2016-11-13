@@ -1,0 +1,73 @@
+{% include base.html %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <style>
+          canvas {
+            margin: 50px;
+            height: 600px;
+            width: 800px;
+          }
+          h2 { font-size: 130%; }
+          h3 { font-size: 110%; font-weight: bold; margin: 5px 0;}
+        </style>
+        <title>Kivy Browser Demo</title>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <div class="col-lg-2">
+          <h2>Games</h2>
+          <ul>
+            {% for p in site.pages %}
+              {% assign depth = p.url | split: '/' | size | minus: 1 %}
+              {% if depth == 2 %}
+                {% include menu_item.html item=p %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+
+          <h2>Kivy Examples</h2>
+          <ul>
+            {% for p in site.pages %}
+              {% assign depth = p.url | split: '/' | size | minus: 1 %}
+              {% if p.url contains '/examples/' and depth == 3 %}
+                {% include menu_item.html item=p %}
+              {% endif %}
+            {% endfor %}
+            <li>
+              <h3>Canvas</h3>
+              <ul>
+              {% for p in site.pages %}
+                {% if p.url contains '/canvas/' %}
+                  {% include menu_item.html item=p %}
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </li>
+            <li>
+              <h3>Widgets</h3>
+              <ul>
+              {% for p in site.pages %}
+                {% if p.url contains '/widget/' %}
+                  {% include menu_item.html item=p %}
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </li>
+          </ul>
+      <ul>
+    </ul>
+        </div>
+
+
+        <div class="col-lg-10">
+          {{ content }}
+        </div>
+
+      </div>
+  </body>
+</html>
+

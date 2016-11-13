@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+{% include base.html %}
+
+<h2>{{ page.title }}</h2>
+<canvas id="canvas"></canvas>
+<div>
+  <p>{% if page.works %}working{% else %}not working{% endif %}</p>
+  {{ content }}
+</div>
+<script type='text/javascript'>
+    var Module = {
+        arguments: ['{{ base }}/common/kivy.zip'],
+                   filePackagePrefixURL: '{{ base }}/common/',
+        canvas: (function() {
+            return document.getElementById('canvas');
+        })()
+    };
+</script>
+<script src='{{ base }}/common/kivy.js'></script>
